@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: programacaaiii_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: programacaoiii_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: programacaaiii_api
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      # Mantém o app em modo DEV por padrão
+      APP_PROFILE: "DEV"
+      # A aplicação (em DEV) usa a string interna abaixo para se conectar ao Postgres
+      DATABASE_URL: "postgresql://postgres:1234@db:5432/programacaoiii_db"
+      # Porta exposta pelo uvicorn (o Dockerfile usa ${PORT:-8000})
+      PORT: "8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  db_data:
