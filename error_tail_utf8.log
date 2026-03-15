@@ -1,0 +1,50 @@
+﻿11/site-packages/passlib/utils/
+handlers.py", line 654, in 
+_norm_checksum
+    raise 
+exc.ChecksumSizeError(self, 
+raw=raw)
+ValueError: malformed bcrypt 
+hash (checksum must be exactly 
+31 chars)
+INFO:     172.19.0.1:41352 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     172.19.0.1:41352 - "OPTIONS /auth/me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:41366 - "GET /auth/me HTTP/1.1" 404 Not Found
+INFO:     172.19.0.1:60176 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     172.19.0.1:60176 - "GET /auth/me HTTP/1.1" 404 Not Found
+INFO:     172.19.0.1:55330 - "OPTIONS /login HTTP/1.1" 200 OK
+INFO:     172.19.0.1:55330 - "POST /login HTTP/1.1" 401 Unauthorized
+INFO:     172.19.0.1:34458 - "POST /login HTTP/1.1" 401 Unauthorized
+INFO:     172.19.0.1:58182 - "POST /login HTTP/1.1" 401 Unauthorized
+INFO:     172.19.0.1:50836 - "POST /login HTTP/1.1" 200 OK
+INFO:     172.19.0.1:50836 - "OPTIONS /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:50846 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:50860 - "OPTIONS /audit/logs HTTP/1.1" 200 OK
+INFO:     172.19.0.1:50868 - "OPTIONS /audit/logs HTTP/1.1" 200 OK
+INFO:     172.19.0.1:50846 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:50860 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:50846 - "GET /audit/logs HTTP/1.1" 200 OK
+INFO:     172.19.0.1:50868 - "GET /audit/logs HTTP/1.1" 200 OK
+INFO:     172.19.0.1:49226 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:49242 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:49242 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:49226 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:40426 - "OPTIONS /login HTTP/1.1" 200 OK
+INFO:     172.19.0.1:40426 - "POST /login HTTP/1.1" 200 OK
+INFO:     172.19.0.1:40426 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:40426 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:40450 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:40434 - "GET /audit/logs HTTP/1.1" 200 OK
+INFO:     172.19.0.1:40450 - "GET /audit/logs HTTP/1.1" 200 OK
+INFO:     172.19.0.1:53316 - "OPTIONS /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:53318 - "OPTIONS /audit/logs HTTP/1.1" 200 OK
+INFO:     172.19.0.1:53318 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:53316 - "GET /audit/logs HTTP/1.1" 200 OK
+INFO:     172.19.0.1:39510 - "POST /login HTTP/1.1" 200 OK
+INFO:     172.19.0.1:39510 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:39510 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:39514 - "GET /audit/logs HTTP/1.1" 200 OK
+INFO:     172.19.0.1:39522 - "GET /me HTTP/1.1" 200 OK
+INFO:     172.19.0.1:39510 - "GET /audit/logs HTTP/1.1" 200 OK
+INFO:     172.19.0.1:52138 - "OPTIONS /data/check-consent HTTP/1.1" 200 OK
+INFO:     172.19.0.1:52138 - "POST /data/check-consent HTTP/1.1" 500 Internal Server Error

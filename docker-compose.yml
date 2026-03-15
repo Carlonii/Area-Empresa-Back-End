@@ -29,11 +29,34 @@ services:
       DATABASE_URL: "postgresql://postgres:1234@db:5432/programacaoiii_db"
       # Porta exposta pelo uvicorn (o Dockerfile usa ${PORT:-8000})
       PORT: "8000"
+      # Configuração do Web3 para conectar ao Ganache no host
+      WEB3_PROVIDER_URL: "http://host.docker.internal:8545"
+      # Endereço do contrato DataConsent implantado
+      DATA_CONSENT_ADDRESS: "0x381840D6b396eee0d714508567401334a101493C"
     ports:
       - "8000:8000"
     volumes:
       - ./:/app
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  indexer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: programacaaiii_indexer
+    restart: unless-stopped
+    depends_on:
+      - db
+      - api
+    environment:
+      APP_PROFILE: "DEV"
+      DATABASE_URL: "postgresql://postgres:1234@db:5432/programacaoiii_db"
+      WEB3_PROVIDER_URL: "http://host.docker.internal:8545"
+      DATA_CONSENT_ADDRESS: "0x381840D6b396eee0d714508567401334a101493C"
+      PYTHONPATH: "/app/app:/app"
+    volumes:
+      - ./:/app
+    command: python app/services/blockchain_indexer.py
 
 volumes:
   db_data:

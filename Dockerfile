@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copia os arquivos de dependências
-COPY pyproject.toml poetry.lock* ./
+COPY pyproject.toml ./
 
 # Instala Poetry
 RUN pip install poetry

@@ -16,3 +16,5 @@ def create_audit_log(db: Session, log: audit_log_model.AuditLogCreate):
 
 def list_audit_logs_by_company(db: Session, company_id: int):
     return db.query(audit_log_model.AuditLog).filter(audit_log_model.AuditLog.company_id == company_id).all()
+def list_audit_logs_by_wallet(db: Session, customer_wallet: str):
+    return db.query(audit_log_model.AuditLog).filter(audit_log_model.AuditLog.customer_wallet == customer_wallet).order_by(audit_log_model.AuditLog.timestamp.desc()).all()

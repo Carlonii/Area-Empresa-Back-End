@@ -4,16 +4,20 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-# Configuração da URL do banco baseada no ambiente
-APP_PROFILE = os.getenv("APP_PROFILE", "DEV")
-
-if APP_PROFILE == "DEV":
-    # URL para desenvolvimento local
-    SQLALCHEMY_DATABASE_URL = "postgresql://postgres:1234@localhost/programacaoiii_db"
+# Configuração da URL do banco baseada no ambiente.
+# Preferimos a variável de ambiente `DATABASE_URL` (setada no Docker Compose)
+# e somente caímos para valores locais quando ela não estiver presente.
+DATABASE_URL = os.getenv("DATABASE_URL")
+if DATABASE_URL:
+    SQLALCHEMY_DATABASE_URL = DATABASE_URL
 else:
-    # URL para produção (Render ou outro provedor)
-    # Render fornece a variável DATABASE_URL automaticamente
-    SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://localhost/mydb")
+    APP_PROFILE = os.getenv("APP_PROFILE", "DEV")
+    if APP_PROFILE == "DEV":
+        # URL para desenvolvimento local
+        SQLALCHEMY_DATABASE_URL = "postgresql://postgres:1234@localhost/programacaoiii_db"
+    else:
+        # Produção sem `DATABASE_URL` configurada — usar um default seguro
+        SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://localhost/mydb")
 
 # 2. Cria a "engine" do SQLAlchemy, que é o ponto de entrada para o banco de dados.
 #    Ela gerencia as conexões com o banco.

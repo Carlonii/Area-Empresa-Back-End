@@ -4,6 +4,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from pydantic import BaseModel, Field, ConfigDict
 from sqlalchemy.sql import func
+from datetime import datetime
 from database import Base
 
 
@@ -40,4 +41,4 @@ class AuditLogPublic(BaseModel):
     customer_wallet: str | None = None
     action_type: str
     result: str
-    timestamp: str
+    timestamp: datetime

@@ -5,12 +5,12 @@ from pydantic import ValidationError
 from sqlalchemy.orm import Session
 
 from database import get_db
-from employees import employee_repository
 from security import SECRET_KEY, ALGORITHM, TokenData
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 
 def get_current_employee(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    from employees import employee_repository
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",

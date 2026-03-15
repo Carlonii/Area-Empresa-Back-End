@@ -59,3 +59,25 @@ def delete_employee(company_id: str, employee_id: str, db: Session = Depends(get
     if str(current_employee.company_id) != str(company_id):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
     return employee_service.delete_employee_by_id(db=db, employee_id=employee_id)
+
+# --- Connection Requests ---
+
+@router.get("/requests/pending")
+def list_connection_requests(company_id: str, db: Session = Depends(get_db), current_employee = Depends(require_role('admin'))):
+    if str(current_employee.company_id) != str(company_id):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
+    return employee_service.get_company_connection_requests(db, company_id)
+
+@router.post("/requests/{request_id}/approve")
+def approve_request(company_id: str, request_id: str, db: Session = Depends(get_db), current_employee = Depends(require_role('admin'))):
+    if str(current_employee.company_id) != str(company_id):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
+    req = employee_service.approve_connection_request(db, request_id)
+    return {"status": "success", "request": req}
+
+@router.post("/requests/{request_id}/reject")
+def reject_request(company_id: str, request_id: str, db: Session = Depends(get_db), current_employee = Depends(require_role('admin'))):
+    if str(current_employee.company_id) != str(company_id):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Forbidden")
+    req = employee_service.reject_connection_request(db, request_id)
+    return {"status": "success", "request": req}
